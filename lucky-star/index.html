@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Anime Central</title>
+    <link rel="stylesheet" href="/style.css">
+  </head>
+
+  <body>
+    <main>
+        <div id="lucky-star-container">
+            <h1>Anime Central</h1>
+
+            <ul>
+                <li>
+                    <a class="directory-link" href="./test.html">
+                        Test
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <script>
+        const containerElement = document.getElementById('lucky-star-container');
+
+        window.onload = function() {
+            const anchorTags = document.getElementsByClassName('directory-link');
+
+            for (const tag of anchorTags) {
+                tag.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    function makeHttpObject() {
+                        try {return new XMLHttpRequest();}
+                        catch (e) {}
+                        try {return new ActiveXObject("Msxml2.XMLHTTP");}
+                        catch (e) {}
+                        try {return new ActiveXObject("Microsoft.XMLHTTP");}
+                        catch (e) {}
+
+                        throw new Error("Could not create HTTP request object.");
+                    }
+
+                    const request = makeHttpObject();
+                    request.open("GET", tag.href, true);
+                    request.send(null);
+                    request.onreadystatechange = function() {
+                    if (request.readyState === 4)
+                        containerElement.innerHTML = request.responseText;
+                    };
+                });
+            }
+        };
+    </script>
+  </body>
+</html>
