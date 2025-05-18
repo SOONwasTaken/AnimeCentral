@@ -6,24 +6,217 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Anime Central</title>
     <link rel="stylesheet" href="/style.css">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+    <style lang="css">
+        /* Make the entire page background color the same */
+        #landing-page-main {
+            background-color: var(--landing-page-background);
+        }
+
+        #heading-container {
+            margin-bottom: 450px;
+        }
+
+        /* Contains the character image and the title text */
+        .character-image-link-wrapper {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            text-decoration: none;
+        }
+
+        .character-image-container {
+            width: 150px;
+            height: 300px;
+        }
+
+        .character-image {
+            width: 150px;
+        }
+
+        /* Hover effect that bounces the image */
+        @keyframes bounce {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes retract {
+            from {
+                transform: translateY(-10px);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .character-image-link-wrapper.is-hovered:hover > 
+        .character-image-container > 
+        .character-image {
+            animation: bounce 0.25s;
+            -webkit-animation: bounce 0.25s;
+            -moz-animation: bounce 0.25s;
+            -o-animation: bounce 0.25s;
+            animation-timing-function: ease;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+
+        .character-image-link-wrapper.is-not-hovered:not(:hover) > 
+        .character-image-container > 
+        .character-image {
+            animation: retract 0.25s;
+            -webkit-animation: retract 0.25s;
+            -moz-animation: retract 0.25s;
+            -o-animation: retract 0.25s;
+            animation-timing-function: ease;
+            animation-iteration-count: 1;
+            animation-fill-mode: initial;
+        }
+
+        /* Double stroke effect for anime title */
+        .anime-name-container {
+            display: flex;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        :nth-child(1 of .anime-name) {
+            z-index: 1;
+            position: absolute;
+        }
+
+        :nth-child(2 of .anime-name) {
+            z-index: 2;
+            position: absolute;
+        }
+
+        /* Anime title hover effects */
+
+        /* Lucky Star Start */
+            .lucky-star-font {
+                font-family: 'Valken';
+            }
+
+            .lucky-star-font-first {
+                color: var(--lucky-star-pink);
+                -webkit-text-stroke: 12px var(--off-white);
+            }
+
+            .character-image-link-wrapper.is-hovered:hover > 
+            .anime-name-container >
+            .lucky-star-font-first {
+                color: var(--off-white);
+                -webkit-text-stroke: 12px var(--lucky-star-pink);
+            }
+
+            .character-image-link-wrapper.is-not-hovered:not(:hover) > 
+            .anime-name-container >
+            .lucky-star-font-first {
+                color: var(--lucky-star-pink);
+                -webkit-text-stroke: 12px var(--off-white);
+            }
+
+            .lucky-star-font-second {
+                color: var(--off-white);
+                -webkit-text-stroke: 4px var(--lucky-star-pink);
+            }
+
+            .character-image-link-wrapper.is-hovered:hover > 
+            .anime-name-container >
+            .lucky-star-font-second {
+                color: var(--lucky-star-pink);
+                -webkit-text-stroke: 4px var(--off-white);
+            }
+
+            .character-image-link-wrapper.is-not-hovered:not(:hover) > 
+            .anime-name-container >
+            .lucky-star-font-second {
+                color: var(--off-white);
+                -webkit-text-stroke: 4px var(--lucky-star-pink);
+            }
+        /* Lucky Star End */
+    </style>
   </head>
 
   <body>
-    <main>
-        <h1>Anime Central</h1>
+    <main id="landing-page-main">   
+        <div id="heading-container" class="head-container">
+            <h1 class="lucky-star-font">Anime Central</h1>
+        </div>
 
-        <ul>
-            <li>
-                <a href="./lucky-star/index.html">
-                    Lucky Star
-                </a>
-            </li>
-        </ul>
+        <div class="content-container">
+            <a class="character-image-link-wrapper" href="/lucky-star/index.html">
+                <div class="character-image-container">
+                    <img 
+                        class="character-image" 
+                        src="" 
+                        data-image-name="konata-landing-page" 
+                    />
+                </div>
+
+                <div class="anime-name-container">
+                    <p class="anime-name lucky-star-font lucky-star-font-first">
+                        Lucky Star
+                    </p>
+
+                    <p class="anime-name lucky-star-font lucky-star-font-second">
+                        Lucky Star
+                    </p>
+                </div>
+            </a>
+
+            <!-- More anime goes here... -->
+        </div>
     </main>
 
     <script>
-        
+        window.onload = () => {
+            const imageFolder = 'assets/img/char/';
+            const png = '.png';
+            const initial = '-1.png';
+            const hovered = '-2.png'
+
+            const characterImageWrappers = 
+                document.getElementsByClassName('character-image-link-wrapper');
+
+            for (const imgContainer of characterImageWrappers) {
+                const img = imgContainer.querySelector('.character-image-container .character-image');
+             
+                // Change the character image depending on if it is hovered or not
+                const notHoveredImagePath = imageFolder + img.dataset.imageName + initial;
+                const hoveredImagePath = imageFolder + img.dataset.imageName + hovered;
+                img.src = notHoveredImagePath;
+
+                // Uses the spread operator to get the class list as an array
+                const imageClassList = [...img.classList];
+
+                /*
+                    Dynamically add the hover class to prevent
+                    issues with hover effects applying when
+                    the page loads.
+                */
+                imgContainer.addEventListener('mouseenter', (e) => {
+                    if (imageClassList.includes('is-not-hovered')) { imgContainer.classList.remove('is-not-hovered'); }
+                    if (!imageClassList.includes('is-hovered')) { imgContainer.classList.add('is-hovered'); }
+
+                    img.src = hoveredImagePath;
+                });
+
+                imgContainer.addEventListener('mouseleave', (e) => {
+                    if (imageClassList.includes('is-hovered')) { imgContainer.classList.remove('is-hovered'); }
+                    if (!imageClassList.includes('is-not-hovered')) { imgContainer.classList.add('is-not-hovered'); }
+
+                    img.src = notHoveredImagePath;
+                });
+            }
+        }
+
     </script>
   </body>
 </html>
