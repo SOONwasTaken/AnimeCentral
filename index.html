@@ -7,7 +7,6 @@
     <title>Anime Central</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="icon" href="./assets/img/favicon.ico" type="image/x-icon">
-    <script type="module" src="./utils.js"></script>
     <style lang="css">
         /* Make the entire page background color the same */
         #landing-page-main {
@@ -177,13 +176,6 @@
     </main>
 
     <script type="module">
-        import { GITHUB_PAGES_DIRECTORY, IS_ON_GITHUB_PAGES } from './utils.js';
-        
-        console.log(`
-            IS_ON_GITHUB_PAGES: ${IS_ON_GITHUB_PAGES}, 
-            GITHUB_PAGES_DIRECTORY: ${GITHUB_PAGES_DIRECTORY}
-        `);
-
         window.addEventListener("load", (e) => {
             const imageFolder = 'assets/img/char/';
             const png = '.png';
