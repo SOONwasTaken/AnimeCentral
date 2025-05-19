@@ -145,12 +145,12 @@
   </head>
 
   <body>
-    <main id="landing-page-main">   
+    <main id="landing-page-main" class="flex-container">   
         <div id="heading-container" class="head-container">
             <h1 class="lucky-star-font">Anime Central</h1>
         </div>
 
-        <div class="content-container">
+        <div>
             <a class="character-image-link-wrapper" href="./lucky-star/index.html">
                 <div class="character-image-container">
                     <img 
@@ -175,8 +175,16 @@
         </div>
     </main>
 
-    <script>
-        window.onload = () => {
+    <script type="module" src="./utils.js"></script>
+    <script type="module">
+        import { GITHUB_PAGES_DIRECTORY, IS_ON_GITHUB_PAGES } from './utils.js';
+        
+        console.log(`
+            IS_ON_GITHUB_PAGES: ${IS_ON_GITHUB_PAGES}, 
+            GITHUB_PAGES_DIRECTORY: ${GITHUB_PAGES_DIRECTORY}
+        `);
+
+        window.addEventListener("load", (e) => {
             const imageFolder = 'assets/img/char/';
             const png = '.png';
             const initial = '-1.png';
@@ -215,8 +223,9 @@
                     img.src = notHoveredImagePath;
                 });
             }
-        }
+        });
 
+        
     </script>
   </body>
 </html>

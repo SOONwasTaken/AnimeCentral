@@ -6,7 +6,7 @@ html, body, main {
     min-width: 100vw;
 }
 
-main {
+.flex-container {
     display: flex;
     align-items: center;
     justify-content: center;
