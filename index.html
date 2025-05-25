@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Anime Central</title>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="icon" href="./assets/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
     <style lang="css">
         /* Make the entire page background color the same */
         #landing-page-main {
@@ -176,8 +176,18 @@
     </main>
 
     <script type="module">
+        import 'https://tomashubelbauer.github.io/github-pages-local-storage/index.js';
+
+        const fs = require('fs');
+        const repoName = '/AnimeCentral/';
+        export const isGithubPages = fs.existsSync(repoName);
+        export const baseURL = isGithubPages ? repoName : './';
+        localStorage.setItem('baseURL', baseURL);
+    </script>
+
+    <script>
         window.addEventListener("load", (e) => {
-            const imageFolder = 'assets/img/char/';
+            const imageFolder = baseURL + 'assets/img/char/';
             const png = '.png';
             const initial = '-1.png';
             const hovered = '-2.png'
