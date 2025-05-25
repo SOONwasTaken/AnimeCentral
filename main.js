@@ -1,8 +1,13 @@
+import 'https://tomashubelbauer.github.io/github-pages-local-storage/index.js';
+
+export const isGithubPages = fs.existsSync(repoName);
+export const baseURL = isGithubPages ? './' : repoName;
+localStorage.setItem('baseURL', baseURL);
+
 const repoName = '/AnimeCentral/';
 
 const fs = require('fs');
-export const isGithubPages = fs.existsSync(repoName);
-export const baseURL = isGithubPages ? './' : repoName;
+
 
 function makeHttpObject() {
     try { return new XMLHttpRequest(); }

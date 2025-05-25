@@ -21,7 +21,9 @@
         </main>
 
         <script type="module">
-            import { createLayout } from '/main.js';
+            const baseURL = localStorage.getItem('baseURL');
+
+            const { createLayout } = await import(baseURL + 'main.js');
 
             window.onload = function () {
                 createLayout('lucky-star-container');
