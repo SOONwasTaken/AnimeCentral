@@ -1,6 +1,7 @@
 import 'https://tomashubelbauer.github.io/github-pages-local-storage/index.js';
 
-const fs = require('fs');
+export const fs = require('fs');
+
 const repoName = '/AnimeCentral/';
 export const isGithubPages = fs.existsSync(repoName);
 export const baseURL = isGithubPages ? './' : repoName;
@@ -18,10 +19,11 @@ function makeHttpObject() {
 }
 
 export function createLayout(containerId) {
-    const linkTags = document.getElementsByTagName('link');
-    for (const tag of linkTags) {
-        tag.setAttribute('href', baseURL + tag.href);
-    }
+
+    const styleSheet = document.createElement('link');
+    styleSheet.rel = 'stylesheet';
+    styleSheet.href = (isGithubPages ? repoName : '') + 'style.css';
+    document.getElementsByTagName('head')[0].appendChild(styleSheet);
 
     const containerElement = document.getElementById('#' + containerId);
     const anchorTags = document.getElementsByClassName('directory-link');

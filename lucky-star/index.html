@@ -2,7 +2,6 @@
 <html lang="en">
     <head>
         <title>Anime Central</title>
-        <link rel="stylesheet" href="style.css">
     </head>
 
     <body>
@@ -22,12 +21,8 @@
 
         <script type="module">
             const baseURL = localStorage.getItem('baseURL');
-
             const { createLayout } = await import(baseURL + 'main.js');
-
-            window.onload = function () {
-                createLayout('lucky-star-container');
-            };
+            createLayout('lucky-star-container');
         </script>
     </body>
 </html>

@@ -148,6 +148,7 @@
     <main id="landing-page-main" class="flex-container">   
         <div id="heading-container" class="head-container">
             <h1 class="lucky-star-font">Anime Central</h1>
+            <h1 id="test"></h1>
         </div>
 
         <div>
@@ -174,20 +175,14 @@
             <!-- More anime goes here... -->
         </div>
     </main>
-
-    <script type="module">
-        import 'https://tomashubelbauer.github.io/github-pages-local-storage/index.js';
-
-        const fs = require('fs');
-        const repoName = '/AnimeCentral/';
-        export const isGithubPages = fs.existsSync(repoName);
-        export const baseURL = isGithubPages ? repoName : './';
-        localStorage.setItem('baseURL', baseURL);
-    </script>
-
+    
+    <script type="module" src="main.js"></script>
     <script>
         window.addEventListener("load", (e) => {
+            const baseURL = localStorage.getItem('baseURL');
+            
             const imageFolder = baseURL + 'assets/img/char/';
+
             const png = '.png';
             const initial = '-1.png';
             const hovered = '-2.png'
